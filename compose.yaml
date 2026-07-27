@@ -1,0 +1,99 @@
+services:
+  redis:
+    image: redis:8-alpine
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:?Set REDIS_PASSWORD in .env}"]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD in .env}
+    volumes:
+      - paper_redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3100
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      CORS_ORIGINS: ${WEB_PUBLIC_URL:-http://localhost:8080}
+      OUTPUT_DIR: /data/generated
+      REDIS_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD in .env}@redis:6379
+      GENERATION_QUEUE_NAME: ${GENERATION_QUEUE_NAME:-wenhe-generation}
+      AI_MOCK_MODE: ${AI_MOCK_MODE:-false}
+      AI_MAX_CONCURRENCY: ${AI_MAX_CONCURRENCY:-3}
+      DEMO_AUTH_ENABLED: ${DEMO_AUTH_ENABLED:-false}
+      DEMO_USER_EMAIL: ${DEMO_USER_EMAIL:-}
+      DEMO_USER_PASSWORD: ${DEMO_USER_PASSWORD:-}
+      DEMO_ADMIN_EMAIL: ${DEMO_ADMIN_EMAIL:-}
+      DEMO_ADMIN_PASSWORD: ${DEMO_ADMIN_PASSWORD:-}
+      WECHAT_APP_ID: ${WECHAT_APP_ID:-}
+      WECHAT_APP_SECRET: ${WECHAT_APP_SECRET:-}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-chat}
+      RELAY_API_KEY: ${RELAY_API_KEY:-}
+      RELAY_BASE_URL: ${RELAY_BASE_URL:-}
+      RELAY_MODEL: ${RELAY_MODEL:-}
+      RELAY_ALLOWED_HOSTS: ${RELAY_ALLOWED_HOSTS:-}
+    ports:
+      - "${API_PORT:-3100}:3100"
+    volumes:
+      - paper_documents:/data/generated
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3100/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+    environment:
+      NODE_ENV: production
+      REDIS_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD in .env}@redis:6379
+      GENERATION_QUEUE_NAME: ${GENERATION_QUEUE_NAME:-wenhe-generation}
+      WORKER_CONCURRENCY: ${AI_MAX_CONCURRENCY:-3}
+      AI_MOCK_MODE: ${AI_MOCK_MODE:-false}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-chat}
+      RELAY_API_KEY: ${RELAY_API_KEY:-}
+      RELAY_BASE_URL: ${RELAY_BASE_URL:-}
+      RELAY_MODEL: ${RELAY_MODEL:-}
+      RELAY_ALLOWED_HOSTS: ${RELAY_ALLOWED_HOSTS:-}
+    volumes:
+      - paper_documents:/data/generated
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:3100}
+        VITE_BOOK_SITE_URL: ${VITE_BOOK_SITE_URL:-https://books.example.com}
+    ports:
+      - "8080:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  paper_documents:
+  paper_redis:

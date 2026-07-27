@@ -1,0 +1,33 @@
+.home { padding-top: 22rpx; }
+
+.home__brand { display: flex; align-items: center; justify-content: space-between; padding: 6rpx 2rpx 26rpx; }
+.home__brand-name { display: block; font-size: 42rpx; font-weight: 800; line-height: 1.2; }
+.home__brand-copy { display: block; margin-top: 5rpx; color: var(--muted); font-size: 23rpx; }
+.home__service-state { display: flex; align-items: center; gap: 10rpx; color: #4b625a; font-size: 23rpx; }
+.home__state-dot { width: 13rpx; height: 13rpx; border-radius: 50%; background: #14a77e; box-shadow: 0 0 0 7rpx rgba(20, 167, 126, .1); }
+
+.home__hero {
+  padding: 42rpx 34rpx 30rpx;
+  border-radius: 12rpx;
+  color: #ffffff;
+  background: #0b5d4c;
+  box-shadow: 0 16rpx 34rpx rgba(13, 71, 58, .16);
+}
+
+.home__hero-title { display: block; max-width: 580rpx; font-size: 39rpx; font-weight: 750; line-height: 1.38; }
+.home__hero-copy { display: block; margin-top: 15rpx; color: rgba(255,255,255,.76); font-size: 25rpx; line-height: 1.65; }
+.home__hero-action { display: flex; width: 250rpx; height: 78rpx; align-items: center; justify-content: center; gap: 12rpx; margin: 30rpx 0 0; border-radius: 8rpx; color: var(--primary); background: #ffffff; font-size: 28rpx; font-weight: 700; line-height: 1; }
+.home__hero-foot { display: flex; flex-wrap: wrap; gap: 12rpx 28rpx; margin-top: 30rpx; padding-top: 24rpx; border-top: 1rpx solid rgba(255,255,255,.17); color: rgba(255,255,255,.67); font-size: 22rpx; }
+
+.home__task-list,
+.home__service-list { padding: 28rpx; border-radius: 12rpx; background: #ffffff; box-shadow: 0 8rpx 28rpx rgba(27, 52, 44, .05); }
+.home__task-list { min-height: 150rpx; }
+
+.home__service-list { padding-top: 0; padding-bottom: 0; }
+.home__service-row { display: flex; min-height: 122rpx; align-items: center; border-bottom: 1rpx solid var(--line); }
+.home__service-row:last-child { border-bottom: 0; }
+.home__service-icon { display: flex; width: 70rpx; height: 70rpx; flex: 0 0 auto; align-items: center; justify-content: center; border-radius: 10rpx; background: var(--primary-soft); }
+.home__service-content { display: flex; flex: 1; flex-direction: column; gap: 8rpx; min-width: 0; padding: 0 22rpx; }
+.home__service-title { font-size: 28rpx; font-weight: 650; }
+.home__service-copy { overflow: hidden; color: var(--muted); font-size: 23rpx; text-overflow: ellipsis; white-space: nowrap; }
+.home__chevron { color: #98a39e; font-size: 43rpx; font-family: Arial, sans-serif; }

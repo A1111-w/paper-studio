@@ -1,0 +1,29 @@
+packages:
+  - apps/*
+  - packages/*
+
+overrides:
+  brace-expansion: 5.0.8
+  esbuild: 0.25.12
+  swiper: 12.1.2
+  uuid: 11.1.1
+
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  '@tarojs/binding': true
+  '@tarojs/cli': true
+  core-js: true
+  core-js-pure: true
+  esbuild: true
+  msgpackr-extract: true
+
+onlyBuiltDependencies:
+  - esbuild
+  - '@parcel/watcher'
+  - '@swc/core'
+  - '@tarojs/binding'
+  - '@tarojs/cli'
+  - core-js
+  - core-js-pure
+  - msgpackr-extract

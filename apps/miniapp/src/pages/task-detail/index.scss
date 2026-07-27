@@ -1,0 +1,16 @@
+.task-detail__loading { display: flex; align-items: center; justify-content: center; gap: 18rpx; color: var(--muted); }
+.task-detail__status { display: flex; align-items: center; flex-direction: column; padding: 48rpx 30rpx 38rpx; border-radius: 12rpx; background: #ffffff; }
+.task-detail__status-name { margin-top: 16rpx; font-size: 34rpx; font-weight: 700; }
+.task-detail__status-message { margin-top: 10rpx; color: var(--muted); font-size: 24rpx; text-align: center; line-height: 1.6; }
+.task-detail__progress { width: 100%; height: 12rpx; margin-top: 30rpx; overflow: hidden; border-radius: 6rpx; background: #e6ebe8; }
+.task-detail__progress-value { height: 100%; border-radius: 6rpx; background: var(--primary); transition: width .25s ease; }
+.task-detail__percent { margin-top: 10rpx; color: var(--primary); font-size: 23rpx; }
+.task-detail__document { margin-top: 24rpx; padding: 30rpx; border-radius: 12rpx; background: #ffffff; }
+.task-detail__subject { display: block; padding-bottom: 26rpx; border-bottom: 1rpx solid var(--line); font-size: 32rpx; font-weight: 700; line-height: 1.5; }
+.task-detail__rows > view { display: flex; min-height: 82rpx; align-items: center; justify-content: space-between; gap: 30rpx; border-bottom: 1rpx solid #edf0ef; font-size: 25rpx; }
+.task-detail__rows > view:last-child { border-bottom: 0; }
+.task-detail__rows > view text:first-child { color: var(--muted); }
+.task-detail__rows > view text:last-child { min-width: 0; overflow-wrap: anywhere; text-align: right; }
+.task-detail__id { max-width: 390rpx; color: #53635d; font-family: monospace; font-size: 21rpx; }
+.task-detail__action { margin-top: 28rpx; }
+.task-detail__notice { margin-top: 26rpx; }

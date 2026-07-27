@@ -1,0 +1,27 @@
+{
+  "name": "wenhe-paper-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:client": "vite",
+    "dev:api": "pnpm --filter @wenhe/api dev",
+    "start": "pnpm --filter @wenhe/api start",
+    "preview:web": "vite preview --host 127.0.0.1",
+    "build": "vite build",
+    "build:all": "pnpm -r --if-present build",
+    "test": "pnpm -r --if-present test",
+    "test:all": "pnpm -r --if-present test",
+    "sample:docx": "pnpm --filter @wenhe/document sample"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7"
+  }
+}

@@ -1,0 +1,23 @@
+.create-page { padding-bottom: calc(54rpx + env(safe-area-inset-bottom)); }
+.create-page__section { margin-top: 30rpx; padding: 30rpx 26rpx 6rpx; border-radius: 12rpx; background: #ffffff; box-shadow: 0 8rpx 26rpx rgba(27,52,44,.045); }
+.create-page__section-title { display: flex; align-items: center; gap: 16rpx; margin-bottom: 30rpx; font-size: 30rpx; font-weight: 700; }
+.create-page__step { color: var(--primary); font-family: Arial, sans-serif; font-size: 22rpx; }
+.create-page__two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 18rpx; }
+.create-page__two-columns .picker-control { padding: 0 18rpx; font-size: 25rpx; }
+.create-page__outline { min-height: 150rpx; }
+.create-page__upload { display: flex; min-height: 130rpx; align-items: center; gap: 22rpx; padding: 24rpx; border: 1rpx dashed #a9bbb4; border-radius: 8rpx; background: #fafcfb; }
+.create-page__upload.selected { border-style: solid; border-color: #9bc5b8; background: var(--primary-soft); }
+.create-page__upload-content { display: flex; flex: 1; flex-direction: column; gap: 9rpx; min-width: 0; }
+.create-page__upload-title { overflow: hidden; font-size: 26rpx; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.create-page__upload-copy { color: var(--muted); font-size: 22rpx; line-height: 1.5; }
+.create-page__providers { margin-bottom: 26rpx; }
+.create-page__provider { display: flex; min-height: 104rpx; align-items: center; gap: 20rpx; padding: 20rpx 6rpx; border-bottom: 1rpx solid var(--line); }
+.create-page__provider:last-child { border-bottom: 0; }
+.create-page__radio { display: flex; width: 34rpx; height: 34rpx; flex: 0 0 auto; align-items: center; justify-content: center; border: 2rpx solid #b7c3be; border-radius: 50%; }
+.create-page__provider.active .create-page__radio { border-color: var(--primary); }
+.create-page__provider.active .create-page__radio view { width: 18rpx; height: 18rpx; border-radius: 50%; background: var(--primary); }
+.create-page__provider-content { display: flex; flex-direction: column; gap: 7rpx; }
+.create-page__provider-name { font-size: 27rpx; font-weight: 650; }
+.create-page__provider-copy { color: var(--muted); font-size: 22rpx; line-height: 1.45; }
+.create-page .notice { margin-top: 30rpx; }
+.create-page__submit { margin-top: 30rpx; }
